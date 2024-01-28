@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProveedorDAO {
-    private static final String SELECT_PROVEEDOR = "SELECT * FROM categoria";
-    private static final String SELECT_PROVEEDORBYID = "SELECT * FROM categoria WHERE idCategoria = ?";
-    private static final String INSERT_PROVEEDOR = "INSERT INTO categoria (nombreCategoria) VALUES (?)";
-    private static final String UPDATE_PROVEEDOR = "UPDATE categoria SET nombreCategoria = ? WHERE idCategoria = ?";
-    private static final String DELETE_PROVEEDOR = "DELETE FROM categoria WHERE idCategoria = ?";
+    private static final String SELECT_PROVEEDOR = "SELECT * FROM proveedor";
+    private static final String SELECT_PROVEEDORBYID = "SELECT * FROM proveedor WHERE idProveedor = ?";
+    private static final String INSERT_PROVEEDOR = "INSERT INTO proveedor (nombreProveedor) VALUES (?)";
+    private static final String UPDATE_PROVEEDOR = "UPDATE proveedor SET nombreProveedor = ? WHERE idProveedor = ?";
+    private static final String DELETE_PROVEEDOR = "DELETE FROM proveedor WHERE idProveedor = ?";
 
     public List<Proveedor> getAllProveedores() {
         List<Proveedor> proveedores = new ArrayList<>();
@@ -51,7 +51,7 @@ public class ProveedorDAO {
     public void insertProveedor(Proveedor proveedor) {
         try (Connection connection = ConnectionDB.MySQLConnection();
              PreparedStatement ps = connection.prepareStatement(INSERT_PROVEEDOR)) {
-            ps.setString(2, proveedor.getNombreProveedor());
+            ps.setString(1, proveedor.getNombreProveedor());
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

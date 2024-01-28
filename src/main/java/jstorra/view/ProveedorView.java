@@ -1,6 +1,5 @@
 package jstorra.view;
 
-import jstorra.model.producto.ProductoManagement;
 import jstorra.model.proveedor.ProveedorManagament;
 
 import java.util.InputMismatchException;

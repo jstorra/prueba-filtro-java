@@ -45,7 +45,7 @@ public class CategoriaManagement {
             categorias.forEach(categoria -> System.out.println(categoria.getIdCategoria() + ". " + categoria.getNombreCategoria()));
 
             System.out.print("\nIngresa el ID de la categoria a actualizar: ");
-            int idCategoria = SCANNER.nextInt();
+            long idCategoria = SCANNER.nextLong();
             SCANNER.nextLine();
 
             existe = categorias.stream().anyMatch(categoria -> categoria.getIdCategoria() == idCategoria);
@@ -90,7 +90,7 @@ public class CategoriaManagement {
             categorias.forEach(categoria -> System.out.println(categoria.getIdCategoria() + ". " + categoria.getNombreCategoria()));
 
             System.out.print("\nIngresa el ID de la categoria a eliminar: ");
-            int idCategoria = SCANNER.nextInt();
+            long idCategoria = SCANNER.nextLong();
             SCANNER.nextLine();
 
             existe = categorias.stream().anyMatch(categoria -> categoria.getIdCategoria() == idCategoria);

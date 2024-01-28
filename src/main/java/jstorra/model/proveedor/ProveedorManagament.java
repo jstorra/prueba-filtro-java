@@ -45,7 +45,7 @@ public class ProveedorManagament {
             proveedores.forEach(proveedor -> System.out.println(proveedor.getIdProveedor() + ". " + proveedor.getNombreProveedor()));
 
             System.out.print("\nIngresa el ID del proveedor a actualizar: ");
-            int idProveedor = SCANNER.nextInt();
+            long idProveedor = SCANNER.nextLong();
             SCANNER.nextLine();
 
             existe = proveedores.stream().anyMatch(proveedor -> proveedor.getIdProveedor() == idProveedor);
@@ -79,11 +79,42 @@ public class ProveedorManagament {
     }
 
     public static void eliminarProveedor() {
+        try {
+            proveedores = ProveedorController.getAllProveedores();
 
+            if (proveedores.isEmpty())
+                throw new Exception("\nMensaje: No hay proveedores para eliminar.");
+
+            System.out.println("\n--------- ELIMINAR PROVEEDOR ---------\n");
+
+            proveedores.forEach(proveedor -> System.out.println(proveedor.getIdProveedor() + ". " + proveedor.getNombreProveedor()));
+
+            System.out.print("\nIngresa el ID del proveedor a eliminar: ");
+            long idProveedor = SCANNER.nextLong();
+            SCANNER.nextLine();
+
+            existe = proveedores.stream().anyMatch(proveedor -> proveedor.getIdProveedor() == idProveedor);
+
+            if (!existe)
+                throw new Exception("\nError: El proveedor no existe.");
+
+            ProveedorController.deleteProveedor(idProveedor);
+        } catch (InputMismatchException e) {
+            SCANNER.nextLine();
+            System.out.println("\nError: El caracter ingresado no es valido.");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public static void mostrarProveedores() {
+    public static void mostrarProveedores() throws Exception {
+        proveedores = ProveedorController.getAllProveedores();
 
+        if (proveedores.isEmpty())
+            throw new Exception("\nMensaje: No hay proveedores para mostrar.");
+
+        System.out.println("\n--------- PROVEEDORES EXISTENTES: " + proveedores.size() + " ---------\n");
+
+        proveedores.forEach(proveedor -> System.out.println(proveedor.getIdProveedor() + ". " + proveedor.getNombreProveedor()));
     }
-
 }
