@@ -91,7 +91,100 @@ public class ProductoManagement {
     }
 
     public static void actualizarProducto() {
-    
+        try {
+            productos = ProductoController.getAllProductos();
+
+            if (productos.isEmpty())
+                throw new Exception("\nMensaje: No hay productos para eliminar.");
+
+            System.out.println("\n--------- ACTUALIZAR PRODUCTO ---------\n");
+
+            productos.forEach(producto -> System.out.println(
+                    producto.getIdProducto() + ". " + producto.getNombreProducto()
+                            + ", Categoria: " + CategoriaController.getCategoriaById(producto.getIdCategoria()).getNombreCategoria()
+                            + ", Proveedor: " + ProveedorController.getProveedorById(producto.getIdProveedor()).getNombreProveedor()
+            ));
+
+            System.out.print("\nIngresa el ID del producto a actualizar: ");
+            long idProducto = SCANNER.nextLong();
+
+            existe = productos.stream().anyMatch(producto -> producto.getIdProducto() == idProducto);
+
+            if (!existe)
+                throw new Exception("\nError: El producto no existe.");
+
+            Producto productoActualizar = ProductoController.getProductoById(idProducto);
+
+            System.out.println("\nAntiguo nombre: " + productoActualizar.getNombreProducto());
+            System.out.print("Nuevo nombre: ");
+            String nuevoNombreProducto = SCANNER.nextLine();
+
+            if (nuevoNombreProducto.isEmpty())
+                throw new Exception("\nError: El nombre no debe estar vacio.");
+
+            productos = ProductoController.getAllProductos();
+
+            existe = productos.stream().anyMatch(producto -> producto.getNombreProducto().equalsIgnoreCase(nuevoNombreProducto));
+
+            if (existe)
+                throw new Exception("\nError: El producto ya existe.");
+
+            System.out.println("\nAnterior precio: " + productoActualizar.getPrecio());
+            System.out.print("Nuevo precio: ");
+            double nuevoPrecio = SCANNER.nextDouble();
+            SCANNER.nextLine();
+
+            if (nuevoPrecio < 0)
+                throw new Exception("\nError: El precio no es valido.");
+
+            categorias = CategoriaController.getAllCategorias();
+
+            Long nuevoIdCategoria;
+            if (!categorias.isEmpty()) {
+                categorias.forEach(categoria -> System.out.println(categoria.getIdCategoria() + ". " + categoria.getNombreCategoria()));
+                System.out.println("\nAnterior categoria: " + CategoriaController.getCategoriaById(productoActualizar.getIdCategoria()).getNombreCategoria());
+                System.out.print("Nueva categoria: ");
+                nuevoIdCategoria = SCANNER.nextLong();
+                SCANNER.nextLine();
+
+                existe = categorias.stream().anyMatch(categoria -> categoria.getIdCategoria() == nuevoIdCategoria);
+
+                if (!existe)
+                    throw new Exception("\nError: La categoria no existe.");
+            } else {
+                nuevoIdCategoria = null;
+            }
+
+            proveedores = ProveedorController.getAllProveedores();
+
+            Long nuevoIdProveedor;
+            if (!proveedores.isEmpty()) {
+                proveedores.forEach(proveedor -> System.out.println(proveedor.getIdProveedor() + ". " + proveedor.getNombreProveedor()));
+                System.out.println("\nAnterior proveedor: " + ProveedorController.getProveedorById(productoActualizar.getIdProveedor()).getNombreProveedor());
+                System.out.print("Nuevo proveedor: ");
+                nuevoIdProveedor = SCANNER.nextLong();
+                SCANNER.nextLine();
+
+                existe = proveedores.stream().anyMatch(proveedor -> proveedor.getIdProveedor() == nuevoIdProveedor);
+
+                if (!existe)
+                    throw new Exception("\nError: El proveedor no existe.");
+            } else {
+                nuevoIdProveedor = null;
+            }
+
+            productoActualizar.setNombreProducto(nuevoNombreProducto);
+            productoActualizar.setPrecio(nuevoPrecio);
+            productoActualizar.setIdCategoria(nuevoIdCategoria);
+            productoActualizar.setIdProveedor(nuevoIdProveedor);
+
+            ProductoController.updateProducto(productoActualizar);
+        } catch (InputMismatchException e) {
+            SCANNER.nextLine();
+            System.out.println("\nError: El caracter ingresado no es valido.");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void eliminarProducto() {
@@ -109,7 +202,7 @@ public class ProductoManagement {
                             + ", Proveedor: " + ProveedorController.getProveedorById(producto.getIdProveedor()).getNombreProveedor()
             ));
 
-            System.out.print("Ingresa el ID del producto a eliminar: ");
+            System.out.print("\nIngresa el ID del producto a eliminar: ");
             long idProducto = SCANNER.nextLong();
 
             existe = productos.stream().anyMatch(producto -> producto.getIdProducto() == idProducto);
