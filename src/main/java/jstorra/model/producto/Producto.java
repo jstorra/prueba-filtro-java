@@ -1,4 +1,4 @@
-package jstorra.model;
+package jstorra.model.producto;
 
 public class Producto {
     private long idProducto;
@@ -46,9 +46,15 @@ public class Producto {
     public void setIdProveedor(Long idProveedor) {
         this.idProveedor = idProveedor;
     }
-    
+
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", precio=" + precio + ", idCategoria=" + idCategoria + ", idProveedor=" + idProveedor + '}';
+        return "Producto{" +
+                "idProducto=" + idProducto +
+                ", nombreProducto='" + nombreProducto + '\'' +
+                ", precio=" + precio +
+                ", idCategoria=" + idCategoria +
+                ", idProveedor=" + idProveedor +
+                '}';
     }
 }

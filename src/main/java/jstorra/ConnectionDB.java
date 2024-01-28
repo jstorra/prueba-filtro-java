@@ -2,15 +2,14 @@ package jstorra;
 
 import java.sql.*;
 
-public class ConnectionDB {
+public abstract class ConnectionDB {
     private static String url;
     private static String user;
     private static String password;
-    
-    public static Connection con;
+    private static Connection con;
     
     public static Connection MySQLConnection() {
-        url = "jdbc:mysql://localhost:3306/db_huansync";
+        url = "jdbc:mysql://localhost:3306/db_java";
         user = "root";
         password = "";
         try {
