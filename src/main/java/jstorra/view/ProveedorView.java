@@ -1,24 +1,25 @@
 package jstorra.view;
 
 import jstorra.model.producto.ProductoManagement;
+import jstorra.model.proveedor.ProveedorManagament;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ProductoView {
+public class ProveedorView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static void initAppProducto() {
+    public static void initAppProveedor() {
         while (true) {
             System.out.println("""
-                    
-                    --------- GESTIONAR PRODUCTOS ---------
+                                        
+                    --------- GESTIONAR PROVEEDORES ---------
                                     
                     Escoge la accion a realizar:
-                    1. Agregar producto
-                    2. Actualizar producto
-                    3. Eliminar producto
-                    4. Ver productos
+                    1. Agregar proveedor
+                    2. Actualizar proveedor
+                    3. Eliminar proveedor
+                    4. Ver proveedores
                     0. << Volver al menu
                     """);
             System.out.print("Opcion: ");
@@ -30,13 +31,13 @@ public class ProductoView {
                     System.out.println("\nVolviendo...");
                     break;
                 } else if (opcion == 1) {
-                    ProductoManagement.agregarProducto();
-                } else if (opcion == 2) {
-                    ProductoManagement.actualizarProducto();
+                    ProveedorManagament.agregarProveedor();
+                } else if (opcion == 2){
+                    ProveedorManagament.actualizarProveedor();
                 } else if (opcion == 3) {
-                    ProductoManagement.eliminarProducto();
+                    ProveedorManagament.eliminarProveedor();
                 } else if (opcion == 4) {
-                    ProductoManagement.mostrarProductos();
+                    ProveedorManagament.mostrarProveedores();
                 } else {
                     throw new Exception("\nError: La opcion ingresada no es valida.");
                 }
@@ -47,5 +48,6 @@ public class ProductoView {
                 System.out.println(e.getMessage());
             }
         }
+
     }
 }

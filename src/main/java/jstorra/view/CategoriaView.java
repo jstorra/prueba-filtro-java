@@ -1,41 +1,42 @@
 package jstorra.view;
 
-import jstorra.model.inventario.Inventario;
+import jstorra.model.categoria.CategoriaManagement;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Main {
+public class CategoriaView {
     private static final Scanner SCANNER = new Scanner(System.in);
-    public static void main(String[] args) {
+
+    public static void initAppCategoria() {
         while (true) {
             System.out.println("""
-                
-                --------- MENU PRINCIPAL ---------
-                
-                Escoge la seccion a gestionar:
-                1. Productos
-                2. Categorias
-                3. Proveedores
-                4. Inventarios
-                0. Salir
-                """);
+                                        
+                    --------- GESTIONAR CATEGORIAS ---------
+                                    
+                    Escoge la accion a realizar:
+                    1. Agregar categoria
+                    2. Actualizar categoria
+                    3. Eliminar categoria
+                    4. Ver categorias
+                    0. << Volver al menu
+                    """);
             System.out.print("Opcion: ");
             try {
                 int opcion = SCANNER.nextInt();
                 SCANNER.nextLine();
 
-                if (opcion == 0){
-                    System.out.println("\nSaliendo...");
+                if (opcion == 0) {
+                    System.out.println("\nVolviendo...");
                     break;
                 } else if (opcion == 1) {
-                    ProductoView.initAppProducto();
+                    CategoriaManagement.agregarCategoria();
                 } else if (opcion == 2) {
-                    CategoriaView.initAppCategoria();
+                    CategoriaManagement.actualizarCategoria();
                 } else if (opcion == 3) {
-                    ProveedorView.initAppProveedor();
+                    CategoriaManagement.eliminarCategoria();
                 } else if (opcion == 4) {
-                    InventarioView.initAppInventario();
+                    CategoriaManagement.mostrarCategorias();
                 } else {
                     throw new Exception("\nError: La opcion ingresada no es valida.");
                 }
