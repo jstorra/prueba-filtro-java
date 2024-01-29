@@ -229,8 +229,8 @@ public class ProductoManagement {
 
         productos.forEach(producto -> System.out.println(
                 producto.getIdProducto() + ". " + producto.getNombreProducto()
-                + ", Categoria: " + CategoriaController.getCategoriaById(producto.getIdCategoria()).getNombreCategoria()
-                + ", Proveedor: " + ProveedorController.getProveedorById(producto.getIdProveedor()).getNombreProveedor()
+                + ", Categoria: " + (producto.getIdCategoria() == null ? "No tiene categoria" : CategoriaController.getCategoriaById(producto.getIdCategoria()).getNombreCategoria())
+                + ", Proveedor: " + (producto.getIdProveedor() == null ? "No tiene proveedor" : ProveedorController.getProveedorById(producto.getIdProveedor()).getNombreProveedor())
         ));
     }
 }

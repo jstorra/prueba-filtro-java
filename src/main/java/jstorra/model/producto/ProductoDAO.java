@@ -59,8 +59,8 @@ public class ProductoDAO {
              PreparedStatement ps = connection.prepareStatement(INSERT_PRODUCTO)) {
                 ps.setString(1, producto.getNombreProducto());
                 ps.setDouble(2, producto.getPrecio());
-                ps.setLong(3, producto.getIdCategoria());
-                ps.setLong(4, producto.getIdProveedor());
+                ps.setObject(3, producto.getIdCategoria());
+                ps.setObject(4, producto.getIdProveedor());
                 ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
